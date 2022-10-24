@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require("path");
+const path = require("path"); // server 파일 경로와 client 파일 경로 합쳐주는 모듈
 const app = express();
 const port = 4000;
 
