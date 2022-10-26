@@ -12,27 +12,36 @@ const Heading = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link>
-              <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-                Home
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link
-                to="/upload"
-                style={{ color: "white", textDecoration: "none" }}
-              >
-                Upload
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link
-                to="/list"
-                style={{ color: "white", textDecoration: "none" }}
-              >
-                List
-              </Link>
-            </Nav.Link>
+            <Link
+              to="/"
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "10px",
+              }}
+            >
+              Home
+            </Link>
+            <Link
+              to="/upload"
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "10px",
+              }}
+            >
+              Upload
+            </Link>
+            <Link
+              to="/"
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "10px",
+              }}
+            >
+              List
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
