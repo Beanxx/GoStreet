@@ -85,3 +85,29 @@ app.post("/api/post/detail", (req, res) => {
       res.status(400).json({ success: false });
     });
 });
+
+// 수정
+app.post("/api/post/edit", (req, res) => {
+  let temp = { title: req.body.title, content: req.body.content };
+  // $set: 새로운 정보로 완전히 교체
+  Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+    });
+});
+
+// 삭제
+app.post("/api/post/delete", (req, res) => {
+  Post.deleteOne({ postNum: Number(req.body.postNum) })
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false });
+    });
+});
