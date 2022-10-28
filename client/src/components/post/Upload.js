@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ImageUpload from "./ImageUpload.js";
 import {
   UploadDiv,
   UploadForm,
@@ -12,6 +13,7 @@ const Upload = (props) => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault(); // 버튼 클릭시 기본 동작인 새로고침이 발생하는데 이를 막기 위한 용도
@@ -24,6 +26,7 @@ const Upload = (props) => {
     let body = {
       title,
       content,
+      image,
     };
 
     axios
@@ -53,6 +56,7 @@ const Upload = (props) => {
             setTitle(e.currentTarget.value);
           }}
         />
+        <ImageUpload setImage={setImage} />
         <label htmlFor="content">내용</label>
         <textarea
           id="content"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ImageUpload from "./ImageUpload.js";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -13,6 +14,7 @@ const Edit = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
 
   const [postInfo, setPostInfo] = useState({});
   const [flag, setFlag] = useState(false);
@@ -36,6 +38,7 @@ const Edit = () => {
   useEffect(() => {
     setTitle(postInfo.title);
     setContent(postInfo.content);
+    setImage(postInfo.image);
   }, [postInfo]);
 
   const onSubmit = (e) => {
@@ -48,6 +51,7 @@ const Edit = () => {
     let body = {
       title,
       content,
+      image,
       postNum: params.postNum,
     };
 
@@ -78,6 +82,7 @@ const Edit = () => {
             setTitle(e.currentTarget.value);
           }}
         />
+        <ImageUpload setImage={setImage} />
         <label htmlFor="content">내용</label>
         <textarea
           id="content"

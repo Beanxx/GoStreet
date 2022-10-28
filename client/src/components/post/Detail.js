@@ -55,6 +55,14 @@ const Detail = () => {
         <>
           <Post>
             <p>{postInfo.title}</p>
+            {postInfo.image ? (
+              <img
+                src={postInfo.image}
+                alt=""
+                style={{ width: "100%", height: "auto" }}
+              />
+            ) : null}
+
             <p>{postInfo.content}</p>
           </Post>
           <BtnDiv>

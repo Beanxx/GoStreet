@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 
 // client에서 보내는 body 명령어 추적 가능해짐!
 app.use(express.json());
+app.use("/image", express.static("./image")); // 현재 경로에 있는 이미지 폴더 안에 있는 것들을 이미지로 사용하겠다!
 app.use(express.urlencoded({ extended: true }));
-
 app.use("/api/post", require("./Router/post.js"));
 
 app.listen(port, () => {
