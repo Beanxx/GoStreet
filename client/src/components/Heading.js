@@ -1,14 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import firebase from "../firebase";
 
 const Heading = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  const LogoutHandler = () => {
+    firebase.auth().signOut();
+    navigate("/");
+  };
+
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">React-Community</Navbar.Brand>
+        <Navbar.Brand href="/">React-Community</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -32,17 +40,27 @@ const Heading = () => {
             >
               Upload
             </Link>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+          {user.accessToken ? (
+            <Navbar.Text
+              style={{ color: "white", cursor: "pointer" }}
+              onClick={() => LogoutHandler()}
+            >
+              Logout
+            </Navbar.Text>
+          ) : (
             <Link
               to="/login"
               style={{
                 color: "white",
                 textDecoration: "none",
-                marginRight: "10px",
               }}
             >
               login
             </Link>
-          </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
