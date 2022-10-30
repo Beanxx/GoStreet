@@ -1,12 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginDiv from "../../style/UserCss.js";
+import firebase from "../../firebase.js";
 
 const Login = () => {
   let navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const SignInFunc = async (e) => {
+    e.preventDefault();
+
+    if (!(email && pw)) {
+      return alert("모든 값을 채워주세요.");
+    }
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, pw);
+      navigate("/");
+    } catch (err) {
+      console.log(err.code);
+      if (err.code === "auth/user-not-found") {
+        setErrorMsg("존재하지 않는 이메일입니다.");
+      } else if (err.code === "auth/wrong-password") {
+        setErrorMsg("비밀번호가 일치하지 않습니다.");
+      } else {
+        setErrorMsg("로그인에 실패하였습니다.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setErrorMsg("");
+    }, 4000);
+  }, [errorMsg]);
 
   return (
     <LoginDiv>
@@ -23,7 +53,8 @@ const Login = () => {
           value={pw}
           onChange={(e) => setPw(e.currentTarget.value)}
         />
-        <button>로그인</button>
+        {errorMsg !== "" && <p>{errorMsg}</p>}
+        <button onClick={(e) => SignInFunc(e)}>로그인</button>
         <button
           onClick={(e) => {
             e.preventDefault();
