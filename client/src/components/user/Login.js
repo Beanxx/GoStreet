@@ -32,6 +32,7 @@ const Login = () => {
     }
   };
 
+  // 4초 후 에러메세지 자동적으로 사라지도록
   useEffect(() => {
     setTimeout(() => {
       setErrorMsg("");

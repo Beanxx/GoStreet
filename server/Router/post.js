@@ -2,12 +2,17 @@ var express = require("express");
 var router = express.Router();
 const { Post } = require("../Model/Post.js");
 const { Counter } = require("../Model/Counter.js");
+const { User } = require("../Model/User.js");
 const multer = require("multer");
 const setUpload = require("../Util/upload.js");
 
 // 게시글 추가
 router.post("/submit", (req, res) => {
-  let temp = req.body;
+  let temp = {
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+  };
   // mongoDB에서 여러 document를 찾는 명령어: find()
   // 하나의 document를 찾을 땐 findOne()
   Counter.findOne({ name: "counter" })
@@ -15,16 +20,22 @@ router.post("/submit", (req, res) => {
     .then((counter) => {
       temp.postNum = counter.postNum;
 
-      const CommunityPost = new Post(temp);
+      User.findOne({ uid: req.body.uid })
+        .exec()
+        .then((userInfo) => {
+          temp.author = userInfo._id;
 
-      // $inc : 값 증가시켜줌
-      CommunityPost.save().then(() => {
-        Counter.updateOne({ name: "counter" }, { $inc: { postNum: 1 } }).then(
-          () => {
-            res.status(200).json({ success: true });
-          }
-        );
-      });
+          const CommunityPost = new Post(temp);
+          // $inc : 값 증가시켜줌
+          CommunityPost.save().then(() => {
+            Counter.updateOne(
+              { name: "counter" },
+              { $inc: { postNum: 1 } }
+            ).then(() => {
+              res.status(200).json({ success: true });
+            });
+          });
+        });
     })
     .catch((err) => {
       res.status(400).json({ success: false });
@@ -34,6 +45,7 @@ router.post("/submit", (req, res) => {
 // 게시글 목록 불러오기
 router.post("/list", (req, res) => {
   Post.find()
+    .populate("author") // user 정보 불러오기
     .exec()
     .then((doc) => {
       res.status(200).json({ success: true, postList: doc });
@@ -46,6 +58,7 @@ router.post("/list", (req, res) => {
 // 상세페이지
 router.post("/detail", (req, res) => {
   Post.findOne({ postNum: Number(req.body.postNum) })
+    .populate("author")
     .exec()
     .then((doc) => {
       console.log(doc);

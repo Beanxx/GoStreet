@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ImageUpload from "./ImageUpload.js";
 import {
   UploadDiv,
@@ -6,14 +8,21 @@ import {
   UploadButtonDiv,
 } from "../../style/UploadCSS.js";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Upload = (props) => {
   let navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+
+  useEffect(() => {
+    if (!user.accessToken) {
+      alert("로그인한 회원만 글을 작성할 수 있습니다.");
+      navigate("/login");
+    }
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault(); // 버튼 클릭시 기본 동작인 새로고침이 발생하는데 이를 막기 위한 용도
@@ -27,6 +36,7 @@ const Upload = (props) => {
       title,
       content,
       image,
+      uid: user.uid,
     };
 
     axios

@@ -12,6 +12,8 @@ const Register = () => {
   const [pw, setPw] = useState("");
   const [pwConfirm, setPwConfirm] = useState("");
   const [flag, setFlag] = useState(false);
+  const [nameCheck, setNameCheck] = useState(false);
+  const [nameInfo, setNameInfo] = useState("");
 
   const RegisterFunc = async (e) => {
     setFlag(true); // 회원가입 버튼 한번 클릭하면 flag를 true로 변경하여 버튼이 disabled 상태가 되도록 설정
@@ -25,6 +27,10 @@ const Register = () => {
       return alert("비밀번호와 비빌번호 확인 값은 같아야 합니다.");
     }
 
+    if (!nameCheck) {
+      return alert("닉네임 중복검사를 진행해주세요.");
+    }
+
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, pw);
@@ -32,8 +38,6 @@ const Register = () => {
     await createdUser.user.updateProfile({
       displayName: name,
     });
-
-    console.log(createdUser.user);
 
     let body = {
       email: createdUser.user.multiFactor.user.email,
@@ -51,15 +55,38 @@ const Register = () => {
     });
   };
 
+  const NameCheckFunc = (e) => {
+    e.preventDefault();
+    if (!name) {
+      return alert("닉네임을 입력해주세요.");
+    }
+
+    let body = { displayName: name };
+
+    axios.post("/api/user/namecheck", body).then((response) => {
+      if (response.data.success) {
+        if (response.data.check) {
+          setNameCheck(true);
+          setNameInfo("사용가능한 닉네임입니다.");
+        } else {
+          setNameInfo("사용불가능한 닉네임입니다.");
+        }
+      }
+    });
+  };
+
   return (
     <LoginDiv>
       <form>
-        <label>이름</label>
+        <label>닉네임</label>
         <input
           type="name"
           value={name}
           onChange={(e) => setName(e.currentTarget.value)}
+          disabled={nameCheck}
         />
+        {nameInfo}
+        <button onClick={(e) => NameCheckFunc(e)}>닉네임 중복검사</button>
 
         <label>이메일</label>
         <input
