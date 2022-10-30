@@ -12,7 +12,9 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use("/image", express.static("./image")); // 현재 경로에 있는 이미지 폴더 안에 있는 것들을 이미지로 사용하겠다!
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/post", require("./Router/post.js"));
+app.use("/api/user", require("./Router/user.js"));
 
 app.listen(port, () => {
   mongoose

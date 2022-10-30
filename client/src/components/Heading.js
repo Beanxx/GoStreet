@@ -8,7 +8,7 @@ const Heading = () => {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">React-Community</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -33,14 +33,14 @@ const Heading = () => {
               Upload
             </Link>
             <Link
-              to="/"
+              to="/login"
               style={{
                 color: "white",
                 textDecoration: "none",
                 marginRight: "10px",
               }}
             >
-              List
+              login
             </Link>
           </Nav>
         </Navbar.Collapse>

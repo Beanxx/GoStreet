@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const multer = require("multer");
 const { Post } = require("../Model/Post.js");
 const { Counter } = require("../Model/Counter.js");
+const multer = require("multer");
 const setUpload = require("../Util/upload.js");
 
 // 게시글 추가
