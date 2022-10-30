@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginDiv from "../../style/UserCss.js";
+import LoginDiv from "../../style/UserCSS.js";
 import firebase from "../../firebase.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

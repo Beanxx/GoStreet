@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginDiv from "../../style/UserCss.js";
+import LoginDiv from "../../style/UserCSS.js";
 import firebase from "../../firebase.js";
 
 const Login = () => {
