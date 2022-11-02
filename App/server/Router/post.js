@@ -44,8 +44,24 @@ router.post("/submit", (req, res) => {
 
 // 게시글 목록 불러오기
 router.post("/list", (req, res) => {
-  Post.find()
+  let sort = {};
+
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    // 인기순
+    sort.repleNum = -1;
+  }
+  Post.find({
+    $or: [
+      { title: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ],
+  })
     .populate("author") // user 정보 불러오기
+    .sort(sort)
+    .skip(req.body.skip)
+    .limit(5) // 한번에 찾을 doc 숫자
     .exec()
     .then((doc) => {
       res.status(200).json({ success: true, postList: doc });
