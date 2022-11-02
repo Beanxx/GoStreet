@@ -5,7 +5,7 @@ import { loginUser, clearUser } from "./reducer/userSlice";
 import firebase from "./firebase";
 
 import Heading from "./components/Heading";
-import List from "./components/post/List";
+import MainPage from "./components/MainPage";
 import Upload from "./components/post/Upload";
 import PostArea from "./components/post/PostArea";
 import Edit from "./components/post/Edit";
@@ -31,7 +31,7 @@ function App() {
     <>
       <Heading />
       <Routes>
-        <Route path="/" element={<List />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/post/:postNum" element={<PostArea />} />
         <Route path="/edit/:postNum" element={<Edit />} />
