@@ -16,7 +16,7 @@ const Heading = () => {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="/">React-Community</Navbar.Brand>
+        <Navbar.Brand href="/">GoStreet </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -44,12 +44,32 @@ const Heading = () => {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           {user.accessToken ? (
-            <Navbar.Text
-              style={{ color: "white", cursor: "pointer" }}
-              onClick={() => LogoutHandler()}
-            >
-              Logout
-            </Navbar.Text>
+            <>
+              <Navbar.Text
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  marginRight: "10px",
+                }}
+                onClick={() => LogoutHandler()}
+              >
+                Logout
+              </Navbar.Text>
+              <br />
+              <Navbar.Text style={{ color: "white", cursor: "pointer" }}>
+                <Link
+                  to="/mypage"
+                  style={{
+                    color: "white",
+                    textDecoration: "none",
+                    marginRight: "10px",
+                  }}
+                >
+                  {" "}
+                  MyPage
+                </Link>
+              </Navbar.Text>
+            </>
           ) : (
             <Link
               to="/login"

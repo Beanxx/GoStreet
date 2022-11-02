@@ -11,12 +11,14 @@ import PostArea from "./components/post/PostArea";
 import Edit from "./components/post/Edit";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import MyPage from "./components/user/MyPage";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userInfo) => {
+      console.log(userInfo);
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
       } else {
@@ -35,6 +37,7 @@ function App() {
         <Route path="/edit/:postNum" element={<Edit />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </>
   );

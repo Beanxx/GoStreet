@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { PostDiv, Post, BtnDiv } from "../../style/PostCSS.js";
+import Avatar from "react-avatar";
 
 const Detail = (props) => {
   let params = useParams();
@@ -32,7 +33,10 @@ const Detail = (props) => {
     <PostDiv>
       <Post>
         <h1>{props.postInfo.title}</h1>
-        <h3>{props.postInfo.author.displayName}</h3>
+        <p className="author">
+          <Avatar size="40" round={true} src={props.postInfo.author.photoURL} />
+          {props.postInfo.author.displayName}
+        </p>
         {props.postInfo.image ? (
           <img
             src={props.postInfo.image}

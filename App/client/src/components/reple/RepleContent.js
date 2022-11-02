@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { RepleContentDiv, RepleUploadDiv } from "../../style/RepleCSS";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import Avatar from "react-avatar";
 
 const RepleContent = (props) => {
   const ref = useRef();
@@ -53,6 +54,7 @@ const RepleContent = (props) => {
   return (
     <RepleContentDiv>
       <div className="author">
+        <Avatar size="40" round={true} src={props.reple.author.photoURL} />
         <p>{props.reple.author.displayName}</p>
         {props.reple.author.uid === user.uid && (
           <div className="modalControl">

@@ -37,12 +37,16 @@ const Register = () => {
 
     await createdUser.user.updateProfile({
       displayName: name,
+      photoURL:
+        "https://kr.object.ncloudstorage.com/community-bucket/post/profile.png",
     });
 
     let body = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
+      photoURL:
+        "https://kr.object.ncloudstorage.com/community-bucket/post/profile.png",
     };
 
     axios.post("/api/user/register", body).then((response) => {
