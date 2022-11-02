@@ -6,10 +6,12 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 const MainPage = () => {
   const [postList, setPostList] = useState([]);
   const [sort, setSort] = useState("최신순");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  const getPostList = () => {
     let body = {
       sort,
+      searchTerm,
     };
     axios
       .post("/api/post/list", body)
@@ -21,7 +23,15 @@ const MainPage = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    getPostList();
   }, [sort]);
+
+  const SearchHandler = () => {
+    getPostList();
+  };
 
   return (
     <div>
@@ -30,8 +40,14 @@ const MainPage = () => {
         <Dropdown.Item onClick={() => setSort("인기순")}>인기순</Dropdown.Item>
       </DropdownButton>
       <div>
-        <input type="text" />
-        <button></button>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.currentTarget.value)}
+          onKeyDown={(e) => {
+            if (e.keyCode === 13) SearchHandler();
+          }}
+        />
       </div>
       <List postList={postList} />
     </div>
