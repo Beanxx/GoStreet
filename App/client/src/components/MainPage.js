@@ -10,6 +10,7 @@ const MainPage = () => {
   const [skip, setSkip] = useState(0);
   const [loadMore, setLoadMore] = useState(true);
 
+  // 더불러오기 버튼 클릭시 보여지는 게시물 정렬
   const getPostLoadMore = () => {
     let body = {
       sort,
@@ -32,6 +33,7 @@ const MainPage = () => {
       });
   };
 
+  // 최신순, 인기순 필터 적용시 보여지는 게시물 정렬
   const getPostList = () => {
     setSkip(0);
     let body = {
