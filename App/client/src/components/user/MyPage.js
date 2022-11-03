@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import axios from "axios";
 import firebase from "../../firebase.js";
+import { MypageDiv } from "../../style/MypageCSS.js";
 
 const MyPage = () => {
   const user = useSelector((state) => state.user);
@@ -52,25 +53,32 @@ const MyPage = () => {
   };
 
   return (
-    <div>
+    <MypageDiv>
       <form>
-        <label>
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={(e) => ImageUpload(e)}
-          />
-          <Avatar
-            size="100"
-            round={true}
-            src={currentImage}
-            style={{ cursor: "pointer" }}
-          />
-        </label>
-        <button onClick={(e) => SaveProfile(e)}>저장</button>
+        <div className="avatar-box">
+          <label>
+            <p>이미지를 클릭하여 프로필 이미지를 변경할 수 있습니다 🙌</p>
+            <div className="avatar-style">
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => ImageUpload(e)}
+              />
+              <Avatar
+                size="150"
+                round={true}
+                src={currentImage}
+                style={{ cursor: "pointer" }}
+              />
+            </div>
+          </label>
+        </div>
+        <div className="button-style">
+          <button onClick={(e) => SaveProfile(e)}>저장</button>
+        </div>
       </form>
-    </div>
+    </MypageDiv>
   );
 };
 

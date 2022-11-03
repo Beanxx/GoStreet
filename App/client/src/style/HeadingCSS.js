@@ -12,6 +12,11 @@ const HeadingDiv = styled.div`
     width: 900px;
   }
 
+  .logo-style {
+    font-size: 40px;
+    font-weight: bold;
+  }
+
   .link-style {
     text-decoration: none;
     margin: 0 10px;

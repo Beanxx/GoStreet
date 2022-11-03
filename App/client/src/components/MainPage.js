@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import List from "./post/List.js";
 import axios from "axios";
 import { DropdownButton, Dropdown } from "react-bootstrap";
+import { MainDiv, ButtonDiv } from "../style/MainCss.js";
 
 const MainPage = () => {
   const [postList, setPostList] = useState([]);
@@ -66,26 +67,43 @@ const MainPage = () => {
   };
 
   return (
-    <div>
-      <DropdownButton variant="outline-secondary" title={sort}>
-        <Dropdown.Item onClick={() => setSort("최신순")}>최신순</Dropdown.Item>
-        <Dropdown.Item onClick={() => setSort("인기순")}>인기순</Dropdown.Item>
-      </DropdownButton>
-      <div>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.currentTarget.value)}
-          onKeyDown={(e) => {
-            if (e.keyCode === 13) SearchHandler();
-          }}
-        />
+    <MainDiv>
+      <div className="filter-style">
+        <div>
+          <DropdownButton
+            variant="secondary"
+            title={sort}
+            size="sm"
+            menuVariant="dark"
+          >
+            <Dropdown.Item onClick={() => setSort("최신순")}>
+              최신순
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={() => setSort("인기순")}>
+              인기순
+            </Dropdown.Item>
+          </DropdownButton>
+        </div>
+        <div>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) SearchHandler();
+            }}
+            placeholder="검색어 입력 후 enter를 눌러주세요."
+          />
+        </div>
       </div>
       <List postList={postList} />
       {loadMore && (
-        <button onClick={() => getPostLoadMore()}>더 불러오기</button>
+        <ButtonDiv>
+          <button onClick={() => getPostLoadMore()}>더 불러오기</button>
+        </ButtonDiv>
       )}
-    </div>
+    </MainDiv>
   );
 };
 

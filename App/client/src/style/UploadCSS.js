@@ -1,25 +1,43 @@
 import styled from "@emotion/styled";
 
 const UploadDiv = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  @media (max-width: 850px) {
+    width: 90%;
+  }
 `;
 
 const UploadForm = styled.form`
-  width: 80%;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  #title {
-    border-radius: 10px;
-    border: 1px solid #c6c6c6;
-    padding: 10px;
-    margin-bottom: 10px;
 
-    &:active,
-    &:focus {
-      outline: none;
+  label {
+    font-weight: bold;
+    margin: 20px 0 10px;
+    color: white;
+  }
+
+  .title-style {
+    width: 100%;
+
+    #title {
+      width: 96.4%;
+      margin-left: 10px;
+      border-radius: 7px;
+      border: none;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+      &:active,
+      &:focus {
+        outline: none;
+      }
     }
   }
 
@@ -29,6 +47,10 @@ const UploadForm = styled.form`
     border-radius: 10px;
     border: 1px solid #c6c6c6;
     padding: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
     &:active,
     &:focus {
       outline: none;
@@ -50,39 +72,29 @@ const UploadForm = styled.form`
       box-shadow: inset 0px 0px 5px whitesmoke;
     }
   }
-
-  label {
-    font-weight: bold;
-    margin-top: 10px;
-  }
 `;
 
 const UploadButtonDiv = styled.div`
-  margin-top: 1rem;
+  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
 
   button {
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: black;
+    max-width: 850px;
+    margin: 1rem 0 3rem 0;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    background-color: #50577a;
     color: white;
-    border: 1px solid black;
+    font-weight: bold;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
     &:hover {
-      background-color: white;
-      color: black;
-      border: 1px solid black;
-    }
-    &.cancel {
-      margin-right: 10px;
-      background-color: white;
-      color: black;
-      border: 1px solid black;
-      &:hover {
-        background-color: black;
-        color: white;
-        border: 1px solid black;
-      }
+      background-color: #414763;
     }
   }
 `;

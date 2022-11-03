@@ -73,15 +73,17 @@ const Edit = () => {
   return (
     <UploadDiv>
       <UploadForm>
-        <label htmlFor="title">제목</label>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.currentTarget.value);
-          }}
-        />
+        <div className="title-style">
+          <label htmlFor="title">제목</label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.currentTarget.value);
+            }}
+          />
+        </div>
         <ImageUpload setImage={setImage} />
         <label htmlFor="content">내용</label>
         <textarea

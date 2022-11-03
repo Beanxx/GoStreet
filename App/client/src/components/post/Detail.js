@@ -3,7 +3,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { PostDiv, Post, BtnDiv } from "../../style/PostCSS.js";
+import { ListDiv, ListItem } from "../../style/ListCSS.js";
 import Avatar from "react-avatar";
+import moment from "moment";
 
 const Detail = (props) => {
   let params = useParams();
@@ -29,24 +31,37 @@ const Detail = (props) => {
       });
   };
 
+  const setTime = (a, b) => {
+    if (a !== b) {
+      return moment(b).format("YYYY년 MMMM Do, HH:mm") + " (수정됨)";
+    } else {
+      return moment(a).format("YYYY년 MMMM Do, HH:mm");
+    }
+  };
+
   return (
-    <PostDiv>
-      <Post>
-        <h1>{props.postInfo.title}</h1>
-        <p className="author">
+    <ListDiv>
+      <ListItem>
+        <p className="title-style">{props.postInfo.title}</p>
+        <p className="content-style">{props.postInfo.content}</p>
+        <p className="info-style">
           <Avatar size="40" round={true} src={props.postInfo.author.photoURL} />
-          {props.postInfo.author.displayName}
+          <div>
+            <p className="author-style">{props.postInfo.author.displayName}</p>
+            <p className="date-style">
+              {setTime(props.postInfo.createdAt, props.postInfo.updatedAt)}
+            </p>
+          </div>
         </p>
         {props.postInfo.image ? (
           <img
+            className="photo-style"
             src={props.postInfo.image}
             alt=""
             style={{ width: "100%", height: "auto" }}
           />
         ) : null}
-
-        <p>{props.postInfo.content}</p>
-      </Post>
+      </ListItem>
       {user.uid === props.postInfo.author.uid && (
         <BtnDiv>
           <Link to={`/edit/${props.postInfo.postNum}`}>
@@ -57,7 +72,7 @@ const Detail = (props) => {
           </button>
         </BtnDiv>
       )}
-    </PostDiv>
+    </ListDiv>
   );
 };
 

@@ -3,6 +3,7 @@ import { RepleContentDiv, RepleUploadDiv } from "../../style/RepleCSS";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Avatar from "react-avatar";
+import moment from "moment";
 
 const RepleContent = (props) => {
   const ref = useRef();
@@ -51,14 +52,40 @@ const RepleContent = (props) => {
     }
   };
 
+  const setTime = (a, b) => {
+    if (a !== b) {
+      return moment(b).format("YYYY년 MMMM Do, HH:mm") + " (수정됨)";
+    } else {
+      return moment(a).format("YYYY년 MMMM Do, HH:mm");
+    }
+  };
+
+  const handleQuitEdit = () => {
+    setEditFlag(false);
+    setReple(props.reple.reple);
+  };
+
   return (
     <RepleContentDiv>
-      <div className="author">
-        <Avatar size="40" round={true} src={props.reple.author.photoURL} />
-        <p>{props.reple.author.displayName}</p>
+      <div className="content-style">
+        {editFlag ? (
+          <form className="edit-style">
+            <input
+              type="text"
+              value={reple}
+              onChange={(e) => setReple(e.currentTarget.value)}
+            />
+            <div className="button-style">
+              <button onClick={handleQuitEdit}>취소</button>
+              <button onClick={(e) => SubmitHandler(e)}>수정 완료</button>
+            </div>
+          </form>
+        ) : (
+          <p className="reple-style">{props.reple.reple}</p>
+        )}
         {props.reple.author.uid === user.uid && (
           <div className="modalControl">
-            <span onClick={() => setModalFlag(true)}>...</span>
+            <span onClick={() => setModalFlag(true)}>🛠</span>
             {modalFlag && (
               <div className="modalDiv" ref={ref}>
                 <p
@@ -77,23 +104,14 @@ const RepleContent = (props) => {
           </div>
         )}
       </div>
-      {editFlag ? (
-        <RepleUploadDiv>
-          <form>
-            <input
-              type="text"
-              value={reple}
-              onChange={(e) => setReple(e.currentTarget.value)}
-            />
-            <button onClick={(e) => SubmitHandler(e)}>등록</button>
-          </form>
-          <div className="cancel">
-            <button>취소</button>
-          </div>
-        </RepleUploadDiv>
-      ) : (
-        <p>{props.reple.reple}</p>
-      )}
+      <div className="author-style">
+        <Avatar size="30" round={true} src={props.reple.author.photoURL} />
+
+        <p>{props.reple.author.displayName}</p>
+        <p className="time">
+          {setTime(props.reple.createdAt, props.reple.updatedAt)}
+        </p>
+      </div>
     </RepleContentDiv>
   );
 };

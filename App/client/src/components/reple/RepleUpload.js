@@ -38,7 +38,7 @@ const RepleUpload = (props) => {
           value={reple}
           onChange={(e) => setReple(e.currentTarget.value)}
         />
-        <button onClick={(e) => SubmitHandler(e)}>등록</button>
+        <button onClick={(e) => SubmitHandler(e)}>댓글 달기</button>
       </form>
     </RepleUploadDiv>
   );

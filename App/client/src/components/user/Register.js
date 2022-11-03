@@ -84,13 +84,16 @@ const Register = () => {
       <form>
         <label>닉네임</label>
         <input
+          className="nickname-input"
           type="name"
           value={name}
           onChange={(e) => setName(e.currentTarget.value)}
           disabled={nameCheck}
         />
         {nameInfo}
-        <button onClick={(e) => NameCheckFunc(e)}>닉네임 중복검사</button>
+        <button className="nickname-button" onClick={(e) => NameCheckFunc(e)}>
+          닉네임 중복검사
+        </button>
 
         <label>이메일</label>
         <input

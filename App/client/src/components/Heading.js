@@ -17,10 +17,13 @@ const Heading = () => {
 
   return (
     <HeadingDiv>
-      <Navbar bg="bg-red" expand="lg" variant="dark">
+      <Navbar bg="dark" expand="md" variant="dark">
         <Container className="nav-style">
-          <Link to="/">
-            <Logo />
+          <Link className="link-style" to="/">
+            <div className="logo-style">
+              Go!Street
+              <Logo />
+            </div>
           </Link>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -56,7 +59,7 @@ const Heading = () => {
                 </Navbar.Text>
                 <br />
                 <Navbar.Text>
-                  <Link className="link-style" to="/login">
+                  <Link className="link-style" to="/register">
                     SignUp
                   </Link>
                 </Navbar.Text>

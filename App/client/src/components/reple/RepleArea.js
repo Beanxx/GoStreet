@@ -9,6 +9,7 @@ const RepleArea = (props) => {
 
   return (
     <RepleAreaDiv>
+      <div>💡 댓글</div>
       {user.accessToken && <RepleUpload postId={props.postId} />}
       <RepleList postId={props.postId} />
     </RepleAreaDiv>
