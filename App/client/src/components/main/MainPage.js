@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import List from "../post/List/List.js";
 import axios from "axios";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import { MainDiv, ButtonDiv } from "./MainCss.js";
-import Spinner from "../layout/Spinner.js";
+import { MainDiv, FilterDiv, DropdownDiv, ButtonDiv } from "./MainCss.js";
+import { MoreBtn } from "../UI/Button.js";
 
 const MainPage = () => {
   const [postList, setPostList] = useState([]);
   const [sort, setSort] = useState("최신순");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [skip, setSkip] = useState(0);
   const [loadMore, setLoadMore] = useState(true);
 
@@ -16,7 +16,7 @@ const MainPage = () => {
   const getPostLoadMore = () => {
     let body = {
       sort,
-      searchTerm,
+      search,
       skip,
     };
     axios
@@ -40,7 +40,7 @@ const MainPage = () => {
     setSkip(0);
     let body = {
       sort,
-      searchTerm,
+      search,
       skip: 0,
     };
     axios
@@ -69,8 +69,15 @@ const MainPage = () => {
 
   return (
     <MainDiv>
-      <div className="filter-style">
-        <div>
+      <div className="title-style">
+        매번 달라지는 길거리음식 위치를 찾느라 불편함을 겪으셨나요?{" "}
+        <span>🤔</span>
+      </div>
+      <div className="title-style">
+        Go!Street에서 자유롭게 길거리음식 위치를 공유해보세요! 🫶
+      </div>
+      <FilterDiv>
+        <DropdownDiv>
           <DropdownButton
             variant="secondary"
             title={sort}
@@ -85,23 +92,23 @@ const MainPage = () => {
               인기순
             </Dropdown.Item>
           </DropdownButton>
-        </div>
+        </DropdownDiv>
         <div>
           <input
             type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+            value={search}
+            onChange={(e) => setSearch(e.currentTarget.value)}
             onKeyDown={(e) => {
               if (e.keyCode === 13) SearchHandler();
             }}
             placeholder="검색어 입력 후 enter를 눌러주세요."
           />
         </div>
-      </div>
+      </FilterDiv>
       <List postList={postList} />
       {loadMore && (
         <ButtonDiv>
-          <button onClick={() => getPostLoadMore()}>더 불러오기</button>
+          <MoreBtn onClick={() => getPostLoadMore()}>글 더 불러오기 👀</MoreBtn>
         </ButtonDiv>
       )}
     </MainDiv>

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-const HeadingDiv = styled.div`
+const HeaderDiv = styled.div`
   background-color: #1b1d25;
-  font-size: 25px;
+  font-size: 23px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -13,7 +13,7 @@ const HeadingDiv = styled.div`
   }
 
   .logo-style {
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
   }
 
@@ -25,4 +25,4 @@ const HeadingDiv = styled.div`
   }
 `;
 
-export { HeadingDiv };
+export { HeaderDiv };

@@ -15,16 +15,19 @@ const MypageDiv = styled.div`
   }
 
   .avatar-box {
-    p {
+    .sub-style {
       color: white;
-      font-size: 25px;
-      margin-bottom: 1rem;
+      font-size: 2px;
+      text-align: center;
+      margin: 10px;
     }
 
     .avatar-style {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
     }
   }
 
@@ -35,7 +38,7 @@ const MypageDiv = styled.div`
 
     button {
       max-width: 850px;
-      margin: 1rem 0 3rem 0;
+      /* margin: 1rem 0 3rem 0; */
       border-radius: 5px;
       padding: 10px 15px;
       border: none;

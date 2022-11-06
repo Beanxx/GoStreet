@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RepleContentDiv, RepleUploadDiv } from "./RepleCSS";
+import { RepleContentDiv } from "./RepleCSS";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Avatar from "react-avatar";
 import moment from "moment";
+import Swal from "sweetalert2";
+import { LightBtn } from "../UI/Button";
 
 const RepleContent = (props) => {
   const ref = useRef();
@@ -24,32 +26,64 @@ const RepleContent = (props) => {
 
     axios.post("/api/reple/edit", body).then((response) => {
       if (response.data.success) {
-        alert("댓글 수정에 성공하였습니다.");
+        return Swal.fire({
+          icon: "success",
+          text: "댓글을 수정하였습니다.",
+          button: "확인",
+        }).then(() => {
+          window.location.reload();
+        });
       } else {
-        alert("댓글 수정에 실패하였습니다.");
+        Swal.fire({
+          icon: "error",
+          text: "댓글 수정에 실패하였습니다.",
+          button: "확인",
+        }).then(() => {
+          window.location.reload();
+        });
       }
-      return window.location.reload();
     });
   };
 
   const DeleteHandler = (e) => {
     e.preventDefault();
 
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      let body = { repleId: props.reple._id, postId: props.reple.postId };
+    Swal.fire({
+      icon: "warning",
+      text: "정말로 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+      confirmButtonColor: "#50577a",
+      cancelButtonColor: "#BEBCBA",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let body = { repleId: props.reple._id, postId: props.reple.postId };
 
-      axios
-        .post("/api/reple/delete", body)
-        .then((response) => {
-          if (response.data.success) {
-            alert("댓글이 삭제되었습니다.");
-            window.location.reload();
-          }
-        })
-        .catch((err) => {
-          alert("댓글 삭제에 실패하였습니다.");
-        });
-    }
+        axios
+          .post("/api/reple/delete", body)
+          .then((response) => {
+            if (response.data.success) {
+              Swal.fire({
+                icon: "success",
+                text: "댓글이 삭제되었습니다.",
+                button: "확인",
+              }).then(() => {
+                window.location.reload();
+              });
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              text: "댓글 삭제에 실패하였습니다.",
+              button: "확인",
+            }).then(() => {
+              window.location.reload();
+            });
+          });
+      }
+    });
   };
 
   const setTime = (a, b) => {
@@ -76,8 +110,8 @@ const RepleContent = (props) => {
               onChange={(e) => setReple(e.currentTarget.value)}
             />
             <div className="button-style">
-              <button onClick={handleQuitEdit}>취소</button>
-              <button onClick={(e) => SubmitHandler(e)}>수정 완료</button>
+              <LightBtn onClick={handleQuitEdit}>취소</LightBtn>
+              <LightBtn onClick={(e) => SubmitHandler(e)}>수정 완료</LightBtn>
             </div>
           </form>
         ) : (
@@ -104,10 +138,10 @@ const RepleContent = (props) => {
           </div>
         )}
       </div>
-      <div className="author-style">
+      <div className="info-style">
         <Avatar size="30" round={true} src={props.reple.author.photoURL} />
 
-        <p>{props.reple.author.displayName}</p>
+        <p className="author">{props.reple.author.displayName}</p>
         <p className="time">
           {setTime(props.reple.createdAt, props.reple.updatedAt)}
         </p>

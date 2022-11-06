@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const LoginDiv = styled.div`
-  width: 70%;
+  width: 85%;
   max-width: 350px;
   margin: 0 auto;
   margin-top: 4rem;
@@ -21,8 +21,9 @@ const LoginDiv = styled.div`
       font-weight: bold;
       margin-bottom: 10px;
     }
+
     input {
-      border-radius: 10px;
+      border-radius: 7px;
       border: 1px solid #c6c6c6;
       padding: 5px;
       margin-bottom: 20px;
@@ -38,31 +39,6 @@ const LoginDiv = styled.div`
     }
     .nickname-input {
       margin-bottom: 0;
-    }
-
-    button {
-      border-radius: 20px;
-      padding: 10px;
-
-      background-color: #444c74;
-      color: white;
-      border: 1px solid black;
-      margin-top: 10px;
-      font-weight: bold;
-
-      &:hover {
-        background-color: #5c679a;
-        color: white;
-        border: 1px solid black;
-      }
-    }
-
-    .nickname-button {
-      margin: 0 auto;
-      margin-top: 10px;
-      margin-bottom: 15px;
-      width: 40%;
-      padding: 5px;
     }
 
     @media (max-width: 756px) {

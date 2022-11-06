@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Detail from "./Detail/Detail";
 import RepleArea from "../reple/RepleArea";
-import { Spinner } from "react-bootstrap";
-import { SpinnerDiv } from "./PostCSS";
+import Spinner from "../layout/Spinner";
 
 const PostArea = () => {
   let params = useParams();
@@ -35,11 +34,7 @@ const PostArea = () => {
           <RepleArea postId={postInfo._id} />
         </>
       ) : (
-        <SpinnerDiv>
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </SpinnerDiv>
+        <Spinner />
       )}
     </div>
   );

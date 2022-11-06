@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import firebase from "../../../firebase";
-import { HeadingDiv } from "./HeaderCSS.js";
+import { HeaderDiv } from "./HeaderCSS.js";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
+import Toast from "../../UI/Toast/Toast";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,11 +13,16 @@ const Header = () => {
 
   const LogoutHandler = () => {
     firebase.auth().signOut();
-    navigate("/");
+    Toast.fire({
+      icon: "success",
+      text: "로그아웃이 되었습니다.",
+    }).then(() => {
+      navigate("/");
+    });
   };
 
   return (
-    <HeadingDiv>
+    <HeaderDiv>
       <Navbar bg="dark" expand="md" variant="dark">
         <Container className="nav-style">
           <Link className="link-style" to="/">
@@ -68,7 +74,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </HeadingDiv>
+    </HeaderDiv>
   );
 };
 

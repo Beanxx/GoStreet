@@ -23,7 +23,7 @@ const List = (props) => {
               <p className="title-style">{post.title}</p>
               <p className="content-style">{post.content}</p>
               <div className="info-style">
-                <Avatar size="41" round={true} src={post.author.photoURL} />
+                <Avatar size="40" round={true} src={post.author.photoURL} />
                 <div>
                   <p className="author-style">{post.author.displayName}</p>
                   <p className="date-style">

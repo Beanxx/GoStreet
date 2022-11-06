@@ -54,8 +54,8 @@ router.post("/list", (req, res) => {
   }
   Post.find({
     $or: [
-      { title: { $regex: req.body.searchTerm } },
-      { content: { $regex: req.body.searchTerm } },
+      { title: { $regex: req.body.search } },
+      { content: { $regex: req.body.search } },
     ],
   })
     .populate("author") // user 정보 불러오기

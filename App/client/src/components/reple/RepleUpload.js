@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RepleUploadDiv } from "./RepleCSS";
+import Toast from "../UI/Toast/Toast";
+import Swal from "sweetalert2";
 
 const RepleUpload = (props) => {
   const [reple, setReple] = useState("");
@@ -11,7 +13,11 @@ const RepleUpload = (props) => {
     e.preventDefault();
 
     if (!reple) {
-      return alert("댓글 내용을 채워주세요.");
+      return Toast.fire({
+        position: "bottom",
+        icon: "warning",
+        text: "댓글 내용을 채워주세요.",
+      });
     }
 
     let body = {
@@ -22,10 +28,19 @@ const RepleUpload = (props) => {
 
     axios.post("/api/reple/submit", body).then((response) => {
       if (response.data.success) {
-        alert("댓글 작성이 성공하였습니다.");
-        window.location.reload(); // 새로고침
+        Swal.fire({
+          icon: "success",
+          text: "댓글을 등록하였습니다.",
+          button: "확인",
+        }).then(() => {
+          window.location.reload();
+        });
       } else {
-        alert("댓글 작성에 실패하였습니다.");
+        Toast.fire({
+          position: "bottom",
+          icon: "error",
+          text: "댓글 작성에 실패하였습니다.",
+        });
       }
     });
   };
@@ -38,7 +53,7 @@ const RepleUpload = (props) => {
           value={reple}
           onChange={(e) => setReple(e.currentTarget.value)}
         />
-        <button onClick={(e) => SubmitHandler(e)}>댓글 달기</button>
+        <button onClick={(e) => SubmitHandler(e)}>⏎</button>
       </form>
     </RepleUploadDiv>
   );

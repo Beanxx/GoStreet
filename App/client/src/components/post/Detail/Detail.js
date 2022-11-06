@@ -6,6 +6,7 @@ import { PostDiv, Post, BtnDiv } from "../PostCSS.js";
 import { ListDiv, ListItem } from "../List/ListCSS";
 import Avatar from "react-avatar";
 import moment from "moment";
+import { FillBtn } from "../../UI/Button.js";
 
 const Detail = (props) => {
   let params = useParams();
@@ -65,11 +66,11 @@ const Detail = (props) => {
       {user.uid === props.postInfo.author.uid && (
         <BtnDiv>
           <Link to={`/edit/${props.postInfo.postNum}`}>
-            <button className="edit">수정</button>
+            <FillBtn className="edit">수정</FillBtn>
           </Link>
-          <button className="delete" onClick={() => DeleteHandler()}>
+          <FillBtn className="delete" onClick={() => DeleteHandler()}>
             삭제
-          </button>
+          </FillBtn>
         </BtnDiv>
       )}
     </ListDiv>

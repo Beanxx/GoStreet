@@ -5,6 +5,8 @@ import Avatar from "react-avatar";
 import axios from "axios";
 import firebase from "../../../firebase.js";
 import { MypageDiv } from "./MypageCSS.js";
+import Swal from "sweetalert2";
+import { FillBtn } from "../../UI/Button";
 
 const MyPage = () => {
   const user = useSelector((state) => state.user);
@@ -44,8 +46,13 @@ const MyPage = () => {
     };
     axios.post("/api/user/profile/update", body).then((response) => {
       if (response.data.success) {
-        alert("프로필 저장에 성공하였습니다.");
-        window.location.reload();
+        Swal.fire({
+          icon: "success",
+          text: "프로필 저장에 성공하였습니다.",
+          button: "확인",
+        }).then(() => {
+          window.location.reload();
+        });
       } else {
         return alert("프로필 저장에 실패하였습니다.");
       }
@@ -57,7 +64,8 @@ const MyPage = () => {
       <form>
         <div className="avatar-box">
           <label>
-            <p>이미지를 클릭하여 프로필 이미지를 변경할 수 있습니다 🙌</p>
+            <div className="sub-style">이미지를 클릭하여</div>
+            <div className="sub-style">프로필 이미지를 변경할 수 있습니다!</div>
             <div className="avatar-style">
               <input
                 type="file"
@@ -75,7 +83,7 @@ const MyPage = () => {
           </label>
         </div>
         <div className="button-style">
-          <button onClick={(e) => SaveProfile(e)}>저장</button>
+          <FillBtn onClick={(e) => SaveProfile(e)}>저장</FillBtn>
         </div>
       </form>
     </MypageDiv>

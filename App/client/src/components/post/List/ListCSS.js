@@ -14,7 +14,7 @@ const ListItem = styled.div`
   width: 100%;
   height: auto;
   min-height: 120px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   padding: 20px;
   background-color: #fffbf6;
   border-radius: 7px;
@@ -29,9 +29,13 @@ const ListItem = styled.div`
 
   .title-style {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 27px;
     margin-left: 5px;
     margin-bottom: 13px;
+
+    @media (max-width: 850px) {
+      font-size: 21px;
+    }
   }
 
   .info-style {
@@ -41,18 +45,34 @@ const ListItem = styled.div`
     margin-top: 1rem;
 
     .author-style {
-      font-size: 21px;
+      font-size: 20px;
+
+      @media (max-width: 850px) {
+        font-size: 17px;
+      }
     }
 
     .date-style {
       color: gray;
       font-size: 18px;
+
+      @media (max-width: 850px) {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      margin-top: 7px;
     }
   }
 
   .content-style {
     margin-left: 5px;
-    font-size: 23px;
+    font-size: 22px;
+
+    @media (max-width: 850px) {
+      font-size: 19px;
+    }
   }
 
   .photo-style {

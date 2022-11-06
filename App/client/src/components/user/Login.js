@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginDiv from "./UserCSS.js";
 import firebase from "../../firebase.js";
+import Toast from "../UI/Toast/Toast.js";
+import { LoginBtn } from "../UI/Button.js";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -14,14 +16,21 @@ const Login = () => {
     e.preventDefault();
 
     if (!(email && pw)) {
-      return alert("모든 값을 채워주세요.");
+      return Toast.fire({
+        icon: "warning",
+        text: "모든 칸을 채워주세요.",
+      });
     }
 
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pw);
-      navigate("/");
+      Toast.fire({
+        icon: "success",
+        text: "Go!Street에 오신 것을 환영합니다 :>",
+      }).then(() => {
+        navigate("/");
+      });
     } catch (err) {
-      console.log(err.code);
       if (err.code === "auth/user-not-found") {
         setErrorMsg("존재하지 않는 이메일입니다.");
       } else if (err.code === "auth/wrong-password") {
@@ -55,15 +64,15 @@ const Login = () => {
           onChange={(e) => setPw(e.currentTarget.value)}
         />
         {errorMsg !== "" && <p>{errorMsg}</p>}
-        <button onClick={(e) => SignInFunc(e)}>로그인</button>
-        <button
+        <LoginBtn onClick={(e) => SignInFunc(e)}>로그인</LoginBtn>
+        <LoginBtn
           onClick={(e) => {
             e.preventDefault();
             navigate("/register");
           }}
         >
           회원가입
-        </button>
+        </LoginBtn>
       </form>
     </LoginDiv>
   );
