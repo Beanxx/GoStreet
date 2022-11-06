@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { loginUser, clearUser } from "./reducer/userSlice";
 import firebase from "./firebase";
 
-import Heading from "./components/Heading";
-import MainPage from "./components/MainPage";
-import Upload from "./components/post/Upload";
+import Heading from "./components/layout/Header/Header";
+import MainPage from "./components/main/MainPage";
+import Upload from "./components/post/Upload/Upload";
 import PostArea from "./components/post/PostArea";
-import Edit from "./components/post/Edit";
+import Edit from "./components/post/Edit/Edit";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
-import MyPage from "./components/user/MyPage";
+import MyPage from "./components/user/MyPage/MyPage";
 
 function App() {
   const dispatch = useDispatch();

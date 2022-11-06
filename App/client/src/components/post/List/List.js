@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ListDiv, ListItem } from "../../style/ListCSS.js";
+import { ListDiv, ListItem } from "./ListCSS.js";
 import Avatar from "react-avatar";
 import moment from "moment";
 import "moment/locale/ko";

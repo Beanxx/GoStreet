@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ImageUpload from "./ImageUpload.js";
-import {
-  UploadDiv,
-  UploadForm,
-  UploadButtonDiv,
-} from "../../style/UploadCSS.js";
+import { UploadDiv, UploadForm, UploadButtonDiv } from "./UploadCSS.js";
 import axios from "axios";
 
 const Upload = (props) => {

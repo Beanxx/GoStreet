@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import List from "./post/List.js";
+import List from "../post/List/List.js";
 import axios from "axios";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import { MainDiv, ButtonDiv } from "../style/MainCss.js";
+import { MainDiv, ButtonDiv } from "./MainCss.js";
 
 const MainPage = () => {
   const [postList, setPostList] = useState([]);

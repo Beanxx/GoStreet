@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ImageUpload from "./ImageUpload.js";
+import ImageUpload from "../Upload/ImageUpload.js";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  UploadDiv,
-  UploadForm,
-  UploadButtonDiv,
-} from "../../style/UploadCSS.js";
+import { UploadDiv, UploadForm, UploadButtonDiv } from "../Upload/UploadCSS.js";
 
 const Edit = () => {
   let params = useParams();

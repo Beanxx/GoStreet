@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RepleContentDiv, RepleUploadDiv } from "../../style/RepleCSS";
+import { RepleContentDiv, RepleUploadDiv } from "./RepleCSS";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Avatar from "react-avatar";

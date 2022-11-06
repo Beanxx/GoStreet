@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Detail from "./Detail";
+import Detail from "./Detail/Detail";
 import RepleArea from "../reple/RepleArea";
 import { Spinner } from "react-bootstrap";
-import { SpinnerDiv } from "../../style/PostCSS";
+import { SpinnerDiv } from "./PostCSS";
 
 const PostArea = () => {
   let params = useParams();

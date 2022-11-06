@@ -2,9 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import firebase from "../firebase";
-import { HeadingDiv } from "../style/HeadingCSS.js";
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import firebase from "../../../firebase";
+import { HeadingDiv } from "./HeaderCSS.js";
+import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 
 const Heading = () => {
   const navigate = useNavigate();

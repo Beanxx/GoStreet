@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RepleContent from "./RepleContent";
-import { RepleListDiv } from "../../style/RepleCSS";
+import { RepleListDiv } from "./RepleCSS";
 
 const RepleList = (props) => {
   const [repleList, setRepleList] = useState([]);

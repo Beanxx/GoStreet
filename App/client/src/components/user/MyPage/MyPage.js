@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import axios from "axios";
-import firebase from "../../firebase.js";
-import { MypageDiv } from "../../style/MypageCSS.js";
+import firebase from "../../../firebase.js";
+import { MypageDiv } from "./MypageCSS.js";
 
 const MyPage = () => {
   const user = useSelector((state) => state.user);

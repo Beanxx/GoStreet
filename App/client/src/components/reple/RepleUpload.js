@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { RepleUploadDiv } from "../../style/RepleCSS";
+import { RepleUploadDiv } from "./RepleCSS";
 
 const RepleUpload = (props) => {
   const [reple, setReple] = useState("");

@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { PostDiv, Post, BtnDiv } from "../../style/PostCSS.js";
-import { ListDiv, ListItem } from "../../style/ListCSS.js";
+import { PostDiv, Post, BtnDiv } from "../PostCSS.js";
+import { ListDiv, ListItem } from "../List/ListCSS";
 import Avatar from "react-avatar";
 import moment from "moment";
 

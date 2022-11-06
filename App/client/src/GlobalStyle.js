@@ -1,7 +1,7 @@
 import * as React from "react";
-import { css, Global } from "@emotion/react";
+import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
-import "./fonts/font.css";
+import "./assets/fonts/font.css";
 
 const GlobalStyle = () => {
   return (
@@ -17,9 +17,6 @@ const GlobalStyle = () => {
           background-color: #2e313d;
           font-family: "UhBeemysen";
           font-size: 20px;
-          /* font-family: "GangwonEdu_OTFBoldA"; */
-          /* font-family: "Pretendard-Regular"; */
-          /* font-family: "Nanum Pen Script", cursive; */
         }
       `}
     />

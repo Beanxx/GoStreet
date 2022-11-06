@@ -2,7 +2,7 @@ import React from "react";
 import RepleUpload from "./RepleUpload";
 import RepleList from "./RepleList";
 import { useSelector } from "react-redux";
-import { RepleAreaDiv } from "../../style/RepleCSS";
+import { RepleAreaDiv } from "./RepleCSS";
 
 const RepleArea = (props) => {
   const user = useSelector((state) => state.user);
