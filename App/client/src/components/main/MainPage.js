@@ -3,6 +3,7 @@ import List from "../post/List/List.js";
 import axios from "axios";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { MainDiv, ButtonDiv } from "./MainCss.js";
+import Spinner from "../layout/Spinner.js";
 
 const MainPage = () => {
   const [postList, setPostList] = useState([]);

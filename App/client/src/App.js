@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser, clearUser } from "./reducer/userSlice";
 import firebase from "./firebase";
+import Spinner from "./components/layout/Spinner";
 
-import Heading from "./components/layout/Header/Header";
-import MainPage from "./components/main/MainPage";
-import Upload from "./components/post/Upload/Upload";
-import PostArea from "./components/post/PostArea";
-import Edit from "./components/post/Edit/Edit";
-import Login from "./components/user/Login";
-import Register from "./components/user/Register";
-import MyPage from "./components/user/MyPage/MyPage";
+const Header = lazy(() => import("./components/layout/Header/Header"));
+const MainPage = lazy(() => import("./components/main/MainPage"));
+const Upload = lazy(() => import("./components/post/Upload/Upload"));
+const PostArea = lazy(() => import("./components/post/PostArea"));
+const Edit = lazy(() => import("./components/post/Edit/Edit"));
+const Login = lazy(() => import("./components/user/Login"));
+const Register = lazy(() => import("./components/user/Register"));
+const MyPage = lazy(() => import("./components/user/MyPage/MyPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -29,16 +30,18 @@ function App() {
 
   return (
     <>
-      <Heading />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/post/:postNum" element={<PostArea />} />
-        <Route path="/edit/:postNum" element={<Edit />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
+      <Suspense fallback={<Spinner />}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/post/:postNum" element={<PostArea />} />
+          <Route path="/edit/:postNum" element={<Edit />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

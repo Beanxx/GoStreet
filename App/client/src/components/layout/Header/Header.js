@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import firebase from "../../../firebase";
 import { HeadingDiv } from "./HeaderCSS.js";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 
-const Heading = () => {
+const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -72,4 +72,4 @@ const Heading = () => {
   );
 };
 
-export default Heading;
+export default Header;
