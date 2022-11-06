@@ -17,7 +17,7 @@ const MypageDiv = styled.div`
   .avatar-box {
     .sub-style {
       color: white;
-      font-size: 2px;
+      font-size: 26px;
       text-align: center;
       margin: 10px;
     }
@@ -35,23 +35,6 @@ const MypageDiv = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-
-    button {
-      max-width: 850px;
-      /* margin: 1rem 0 3rem 0; */
-      border-radius: 5px;
-      padding: 10px 15px;
-      border: none;
-      background-color: #50577a;
-      color: white;
-      font-weight: bold;
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
-        rgba(0, 0, 0, 0.23) 0px 3px 6px;
-
-      &:hover {
-        background-color: #464c6b;
-      }
-    }
   }
 `;
 
