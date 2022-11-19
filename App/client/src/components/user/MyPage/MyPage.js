@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import axios from "axios";
-import firebase from "../../../firebase.js";
+import firebase from "../../../firebase";
 import { MypageDiv } from "./MypageCSS.js";
 import Swal from "sweetalert2";
 import { FillBtn } from "../../UI/Button";

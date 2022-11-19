@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginDiv from "./UserCSS.js";
-import firebase from "../../firebase.js";
+import firebase from "../../firebase";
 import Toast from "../UI/Toast/Toast.js";
 import { LoginBtn } from "../UI/Button.js";
 

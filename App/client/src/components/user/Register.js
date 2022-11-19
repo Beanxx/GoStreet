@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginDiv from "./UserCSS.js";
-import firebase from "../../firebase.js";
+import firebase from "../../firebase";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Toast from "../UI/Toast/Toast.js";

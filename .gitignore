@@ -3,4 +3,4 @@
 /App/package-lock.json
 /App/client/node_modules
 /App/client/package-lock.json
-/App/client/src/firebase.js
+/App/client/src/firebase.ts
