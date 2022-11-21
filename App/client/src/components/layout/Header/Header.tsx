@@ -1,15 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Container, Navbar } from "react-bootstrap";
 import firebase from "../../../firebase";
-import { HeaderDiv } from "./HeaderCSS.js";
-import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import Toast from "../../UI/Toast/Toast";
+import { RootState } from "../../../reducer/store";
+import { HeaderDiv } from "./HeaderCSS";
+import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
 
   const LogoutHandler = () => {
     firebase.auth().signOut();

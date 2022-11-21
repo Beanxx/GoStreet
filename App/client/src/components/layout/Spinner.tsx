@@ -1,11 +1,10 @@
-import React from "react";
 import styled from "@emotion/styled";
 import spinnerImg from "../../assets/images/spinner.gif";
 
 const Spinner = () => {
   return (
     <LoadingDiv>
-      <img src={spinnerImg} alt="" />
+      <img src={spinnerImg} alt="loading..." />
     </LoadingDiv>
   );
 };
