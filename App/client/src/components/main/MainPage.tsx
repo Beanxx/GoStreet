@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import List from "../post/List/List.js";
+import List from "../post/List/List";
 import axios from "axios";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import { MainDiv, FilterDiv, DropdownDiv, ButtonDiv } from "./MainCss.js";
-import { MoreBtn } from "../UI/Button.js";
+import { MainDiv, FilterDiv, DropdownDiv, ButtonDiv } from "./MainCss";
+import { MoreBtn } from "../UI/Button";
+import { PostListType } from "../../types/interfaces";
 
 const MainPage = () => {
-  const [postList, setPostList] = useState([]);
+  const [postList, setPostList] = useState<PostListType[]>([]);
   const [sort, setSort] = useState("최신순");
   const [search, setSearch] = useState("");
   const [skip, setSkip] = useState(0);
@@ -14,7 +15,7 @@ const MainPage = () => {
 
   // 더불러오기 버튼 클릭시 보여지는 게시물 정렬
   const getPostLoadMore = () => {
-    let body = {
+    const body = {
       sort,
       search,
       skip,
@@ -38,7 +39,7 @@ const MainPage = () => {
   // 최신순, 인기순 필터 적용시 보여지는 게시물 정렬
   const getPostList = () => {
     setSkip(0);
-    let body = {
+    const body = {
       sort,
       search,
       skip: 0,
