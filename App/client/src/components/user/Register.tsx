@@ -3,8 +3,8 @@ import LoginDiv from "./UserCSS";
 import firebase from "../../firebase";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Toast from "../UI/Toast/Toast.js";
-import { LoginBtn, NicknameBtn } from "../UI/Button.js";
+import Toast from "../UI/Toast/Toast";
+import { LoginBtn, NicknameBtn } from "../UI/Button";
 
 const Register = () => {
   const navigate = useNavigate();

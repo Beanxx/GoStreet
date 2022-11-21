@@ -54,7 +54,6 @@ const MyPage = () => {
         Swal.fire({
           icon: "success",
           text: "프로필 저장에 성공하였습니다.",
-          // button: "확인",
         }).then(() => {
           window.location.reload();
         });

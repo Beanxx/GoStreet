@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginDiv from "./UserCSS";
 import firebase from "../../firebase";
-import Toast from "../UI/Toast/Toast.js";
-import { LoginBtn } from "../UI/Button.js";
+import Toast from "../UI/Toast/Toast";
+import { LoginBtn } from "../UI/Button";
 
 interface ErrorType {
   code: string;

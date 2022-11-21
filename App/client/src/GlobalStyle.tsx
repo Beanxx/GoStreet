@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
 import "./assets/fonts/font.css";
