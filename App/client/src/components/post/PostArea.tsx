@@ -4,15 +4,16 @@ import axios from "axios";
 import Detail from "./Detail/Detail";
 import RepleArea from "../reple/RepleArea";
 import Spinner from "../layout/Spinner";
+import { PostListType } from "../../types/interfaces";
 
 const PostArea = () => {
-  let params = useParams();
+  const params = useParams();
 
-  const [postInfo, setPostInfo] = useState([]);
+  const [postInfo, setPostInfo] = useState<PostListType>(Object);
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
-    let body = { postNum: params.postNum };
+    const body = { postNum: params.postNum };
     axios
       .post("/api/post/detail", body)
       .then((response) => {
