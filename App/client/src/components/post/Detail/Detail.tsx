@@ -2,23 +2,25 @@ import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { PostDiv, Post, BtnDiv } from "../PostCSS.js";
+import { BtnDiv } from "../PostCSS";
 import { ListDiv, ListItem } from "../List/ListCSS";
 import Avatar from "react-avatar";
 import moment from "moment";
-import { FillBtn } from "../../UI/Button.js";
+import { FillBtn } from "../../UI/Button";
+import { RootState } from "../../../reducer/store";
+import { PostInfo } from "../../../types/interfaces";
 
-const Detail = (props) => {
-  let params = useParams();
-  let navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+const Detail: React.FC<PostInfo> = (props) => {
+  const params = useParams();
+  const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user);
 
   const DeleteHandler = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       alert("확인");
     }
 
-    let body = { postNum: params.postNum };
+    const body = { postNum: params.postNum };
     axios
       .post("/api/post/delete", body)
       .then((response) => {
@@ -32,7 +34,7 @@ const Detail = (props) => {
       });
   };
 
-  const setTime = (a, b) => {
+  const setTime = (a: Date, b: Date) => {
     if (a !== b) {
       return moment(b).format("YYYY년 MMMM Do, HH:mm") + " (수정됨)";
     } else {
