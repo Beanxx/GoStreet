@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ListDiv, ListItem } from "./ListCSS.js";
+import { ListDiv, ListItem } from "./ListCSS";
 import Avatar from "react-avatar";
 import moment from "moment";
 import "moment/locale/ko";
+import { PostList } from "../../../types/interfaces";
 
-const List = (props) => {
-  const setTime = (a, b) => {
+const List: React.FC<PostList> = (props) => {
+  const setTime = (a: Date, b: Date) => {
     if (a !== b) {
       return moment(b).format("YYYY년 MMMM Do, HH:mm") + " (수정됨)";
     } else {
