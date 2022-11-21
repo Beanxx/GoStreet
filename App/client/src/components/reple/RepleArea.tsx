@@ -3,9 +3,11 @@ import RepleUpload from "./RepleUpload";
 import RepleList from "./RepleList";
 import { useSelector } from "react-redux";
 import { RepleAreaDiv } from "./RepleCSS";
+import { RootState } from "../../reducer/store";
+import { PostId } from "../../types/interfaces";
 
-const RepleArea = (props) => {
-  const user = useSelector((state) => state.user);
+const RepleArea = (props: PostId) => {
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <RepleAreaDiv>

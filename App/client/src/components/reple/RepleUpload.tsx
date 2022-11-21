@@ -4,12 +4,16 @@ import { useSelector } from "react-redux";
 import { RepleUploadDiv } from "./RepleCSS";
 import Toast from "../UI/Toast/Toast";
 import Swal from "sweetalert2";
+import { RootState } from "../../reducer/store";
+import { PostId } from "../../types/interfaces";
 
-const RepleUpload = (props) => {
+const RepleUpload = (props: PostId) => {
   const [reple, setReple] = useState("");
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
 
-  const SubmitHandler = (e) => {
+  const SubmitHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
     if (!reple) {
@@ -20,7 +24,7 @@ const RepleUpload = (props) => {
       });
     }
 
-    let body = {
+    const body = {
       reple,
       uid: user.uid,
       postId: props.postId,
@@ -31,7 +35,6 @@ const RepleUpload = (props) => {
         Swal.fire({
           icon: "success",
           text: "댓글을 등록하였습니다.",
-          button: "확인",
         }).then(() => {
           window.location.reload();
         });

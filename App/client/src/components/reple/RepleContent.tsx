@@ -6,18 +6,23 @@ import Avatar from "react-avatar";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { LightBtn } from "../UI/Button";
+import { RootState } from "../../reducer/store";
+import { RepleType } from "../../types/interfaces";
 
-const RepleContent = (props) => {
-  const ref = useRef();
-  const user = useSelector((state) => state.user);
+const RepleContent = (props: RepleType) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const user = useSelector((state: RootState) => state.user);
   const [modalFlag, setModalFlag] = useState(false);
   const [editFlag, setEditFlag] = useState(false);
   const [reple, setReple] = useState(props.reple.reple);
+
   useOnClickOutside(ref, () => setModalFlag(false));
 
-  const SubmitHandler = (e) => {
+  const SubmitHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
-    let body = {
+    const body = {
       uid: user.uid,
       reple,
       postId: props.reple.postId,
@@ -26,10 +31,9 @@ const RepleContent = (props) => {
 
     axios.post("/api/reple/edit", body).then((response) => {
       if (response.data.success) {
-        return Swal.fire({
+        Swal.fire({
           icon: "success",
           text: "댓글을 수정하였습니다.",
-          button: "확인",
         }).then(() => {
           window.location.reload();
         });
@@ -37,7 +41,6 @@ const RepleContent = (props) => {
         Swal.fire({
           icon: "error",
           text: "댓글 수정에 실패하였습니다.",
-          button: "확인",
         }).then(() => {
           window.location.reload();
         });
@@ -45,7 +48,9 @@ const RepleContent = (props) => {
     });
   };
 
-  const DeleteHandler = (e) => {
+  const DeleteHandler = (
+    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
     Swal.fire({
@@ -58,7 +63,7 @@ const RepleContent = (props) => {
       cancelButtonColor: "#BEBCBA",
     }).then((result) => {
       if (result.isConfirmed) {
-        let body = { repleId: props.reple._id, postId: props.reple.postId };
+        const body = { repleId: props.reple._id, postId: props.reple.postId };
 
         axios
           .post("/api/reple/delete", body)
@@ -67,7 +72,6 @@ const RepleContent = (props) => {
               Swal.fire({
                 icon: "success",
                 text: "댓글이 삭제되었습니다.",
-                button: "확인",
               }).then(() => {
                 window.location.reload();
               });
@@ -77,7 +81,6 @@ const RepleContent = (props) => {
             Swal.fire({
               icon: "error",
               text: "댓글 삭제에 실패하였습니다.",
-              button: "확인",
             }).then(() => {
               window.location.reload();
             });
@@ -86,7 +89,7 @@ const RepleContent = (props) => {
     });
   };
 
-  const setTime = (a, b) => {
+  const setTime = (a: Date, b: Date) => {
     if (a !== b) {
       return moment(b).format("YYYY년 MMMM Do, HH:mm") + " (수정됨)";
     } else {
@@ -151,9 +154,9 @@ const RepleContent = (props) => {
 };
 
 // // 모달 밖 클릭시 모달창 닫히도록 하는 Hook
-function useOnClickOutside(ref, handler) {
+function useOnClickOutside(ref: any, handler: any) {
   useEffect(() => {
-    const listener = (event) => {
+    const listener = (event: any) => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
