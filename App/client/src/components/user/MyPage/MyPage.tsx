@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import axios from "axios";
 import firebase from "../../../firebase";
-import { MypageDiv } from "./MypageCSS.js";
+import { MypageDiv } from "./MypageCSS";
 import Swal from "sweetalert2";
 import { FillBtn } from "../../UI/Button";
+import { RootState } from "../../../reducer/store";
 
 const MyPage = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
+
   const navigate = useNavigate();
 
   const [currentImage, setCurrentImage] = useState("");
@@ -20,27 +22,30 @@ const MyPage = () => {
     } else {
       setCurrentImage(user.photoURL);
     }
-  }, [user]);
+  }, [navigate, user]);
 
-  const ImageUpload = (e) => {
-    const formData = new FormData();
-    formData.append("file", e.target.files[0]);
+  const ImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formData: any = new FormData();
+    formData?.append("file", e.target.files?.[0]);
+
     axios.post("/api/user/profile/img", formData).then((response) => {
       setCurrentImage(response.data.filePath);
     });
   };
 
-  const SaveProfile = async (e) => {
+  const SaveProfile = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
     try {
-      await firebase.auth().currentUser.updateProfile({
+      await firebase.auth().currentUser?.updateProfile({
         photoURL: currentImage,
       });
     } catch (error) {
       return alert("프로필 저장에 실패하였습니다.");
     }
-    let body = {
+    const body = {
       photoURL: currentImage,
       uid: user.uid,
     };
@@ -49,7 +54,7 @@ const MyPage = () => {
         Swal.fire({
           icon: "success",
           text: "프로필 저장에 성공하였습니다.",
-          button: "확인",
+          // button: "확인",
         }).then(() => {
           window.location.reload();
         });
