@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ImageUpload from "./ImageUpload.js";
-import { UploadDiv, UploadForm, UploadButtonDiv } from "./UploadCSS.js";
+import ImageUpload from "./ImageUpload";
+import { UploadDiv, UploadForm, UploadButtonDiv } from "./UploadCSS";
 import axios from "axios";
+import { RootState } from "../../../reducer/store";
 
-const Upload = (props) => {
-  let navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+const Upload = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -20,15 +21,14 @@ const Upload = (props) => {
     }
   }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault(); // 버튼 클릭시 기본 동작인 새로고침이 발생하는데 이를 막기 위한 용도
-    // 새로고침이 발생해서 아래 코드들이 무시가 되어 버리므로 코드 추가해주기
 
     if (title === "" || content === "") {
       return alert("모든 항목을 채워주세요!");
     }
 
-    let body = {
+    const body = {
       title,
       content,
       image,
@@ -68,7 +68,6 @@ const Upload = (props) => {
         <label htmlFor="content">내용</label>
         <textarea
           id="content"
-          type="text"
           value={content}
           onChange={(e) => {
             setContent(e.currentTarget.value);
