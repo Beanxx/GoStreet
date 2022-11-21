@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import ImageUpload from "../Upload/ImageUpload.js";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import ImageUpload from "../Upload/ImageUpload";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UploadDiv, UploadForm, UploadButtonDiv } from "../Upload/UploadCSS.js";
+import { UploadDiv, UploadForm, UploadButtonDiv } from "../Upload/UploadCSS";
+import { PostListType } from "../../../types/interfaces";
 
 const Edit = () => {
-  let params = useParams();
-  let navigate = useNavigate();
+  const params = useParams();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
 
-  const [postInfo, setPostInfo] = useState({});
+  const [postInfo, setPostInfo] = useState<PostListType>(Object);
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
-    let body = { postNum: params.postNum };
+    const body = { postNum: params.postNum };
     axios
       .post("/api/post/detail", body)
       .then((response) => {
@@ -29,6 +30,7 @@ const Edit = () => {
         console.log(err);
       });
   }, []);
+  console.log(postInfo.title);
 
   // input란에 초기 데이터 넣어주기
   useEffect(() => {
@@ -37,14 +39,14 @@ const Edit = () => {
     setImage(postInfo.image);
   }, [postInfo]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (title === "" || content === "") {
       return alert("모든 항목을 채워주세요!");
     }
 
-    let body = {
+    const body = {
       title,
       content,
       image,
@@ -84,7 +86,6 @@ const Edit = () => {
         <label htmlFor="content">내용</label>
         <textarea
           id="content"
-          type="text"
           value={content}
           onChange={(e) => {
             setContent(e.currentTarget.value);
