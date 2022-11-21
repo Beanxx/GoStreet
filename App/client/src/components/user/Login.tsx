@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginDiv from "./UserCSS.js";
+import LoginDiv from "./UserCSS";
 import firebase from "../../firebase";
 import Toast from "../UI/Toast/Toast.js";
 import { LoginBtn } from "../UI/Button.js";
 
+interface ErrorType {
+  code: string;
+}
+
 const Login = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const SignInFunc = async (e) => {
+  const SignInFunc = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
     if (!(email && pw)) {
@@ -30,7 +36,8 @@ const Login = () => {
       }).then(() => {
         navigate("/");
       });
-    } catch (err) {
+    } catch (error: unknown) {
+      const err = error as ErrorType;
       if (err.code === "auth/user-not-found") {
         setErrorMsg("존재하지 않는 이메일입니다.");
       } else if (err.code === "auth/wrong-password") {

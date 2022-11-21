@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginDiv from "./UserCSS.js";
+import LoginDiv from "./UserCSS";
 import firebase from "../../firebase";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import Toast from "../UI/Toast/Toast.js";
 import { LoginBtn, NicknameBtn } from "../UI/Button.js";
 
 const Register = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +17,9 @@ const Register = () => {
   const [nameCheck, setNameCheck] = useState(false);
   const [nameInfo, setNameInfo] = useState("");
 
-  const RegisterFunc = async (e) => {
+  const RegisterFunc = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     setFlag(true); // 회원가입 버튼 한번 클릭하면 flag를 true로 변경하여 버튼이 disabled 상태가 되도록 설정
     e.preventDefault();
 
@@ -42,20 +44,20 @@ const Register = () => {
       });
     }
 
-    let createdUser = await firebase
+    const createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, pw);
 
-    await createdUser.user.updateProfile({
+    await createdUser?.user?.updateProfile({
       displayName: name,
       photoURL:
         "https://kr.object.ncloudstorage.com/community-bucket/post/profile.png",
     });
 
-    let body = {
-      email: createdUser.user.multiFactor.user.email,
-      displayName: createdUser.user.multiFactor.user.displayName,
-      uid: createdUser.user.multiFactor.user.uid,
+    const body = {
+      email: createdUser?.user?.multiFactor.user.email,
+      displayName: createdUser?.user?.multiFactor.user.displayName,
+      uid: createdUser?.user?.multiFactor.user.uid,
       photoURL:
         "https://kr.object.ncloudstorage.com/community-bucket/post/profile.png",
     };
@@ -78,7 +80,9 @@ const Register = () => {
     });
   };
 
-  const NameCheckFunc = (e) => {
+  const NameCheckFunc = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
     if (!name) {
       return Toast.fire({
@@ -87,7 +91,7 @@ const Register = () => {
       });
     }
 
-    let body = { displayName: name };
+    const body = { displayName: name };
 
     axios.post("/api/user/namecheck", body).then((response) => {
       if (response.data.success) {
