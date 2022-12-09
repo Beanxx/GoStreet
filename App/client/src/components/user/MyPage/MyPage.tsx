@@ -8,6 +8,7 @@ import { MypageDiv } from "./MypageCSS";
 import Swal from "sweetalert2";
 import { FillBtn } from "../../UI/Button";
 import { RootState } from "../../../reducer/store";
+import Toast from "../../UI/Toast/Toast";
 
 const MyPage = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -43,7 +44,10 @@ const MyPage = () => {
         photoURL: currentImage,
       });
     } catch (error) {
-      return alert("프로필 저장에 실패하였습니다.");
+      return Toast.fire({
+        icon: "error",
+        text: "프로필 저장에 실패하였습니다.",
+      });
     }
     const body = {
       photoURL: currentImage,
@@ -58,7 +62,10 @@ const MyPage = () => {
           window.location.reload();
         });
       } else {
-        return alert("프로필 저장에 실패하였습니다.");
+        return Toast.fire({
+          icon: "error",
+          text: "프로필 저장에 실패하였습니다.",
+        });
       }
     });
   };

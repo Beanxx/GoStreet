@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UploadDiv, UploadForm, UploadButtonDiv } from "../Upload/UploadCSS";
 import { PostListType } from "../../../types/interfaces";
+import Toast from "../../UI/Toast/Toast";
 
 const Edit = () => {
   const params = useParams();
@@ -43,7 +44,10 @@ const Edit = () => {
     e.preventDefault();
 
     if (title === "" || content === "") {
-      return alert("모든 항목을 채워주세요!");
+      return Toast.fire({
+        icon: "warning",
+        text: "모든 항목을 채워주세요!",
+      });
     }
 
     const body = {
@@ -57,10 +61,16 @@ const Edit = () => {
       .post("/api/post/edit", body)
       .then((response) => {
         if (response.data.success) {
-          alert("글 수정이 완료되었습니다.");
+          Toast.fire({
+            icon: "success",
+            text: "글 수정이 완료되었습니다.",
+          });
           navigate(`/post/${params.postNum}`);
         } else {
-          alert("글 수정에 실패하였습니다.");
+          Toast.fire({
+            icon: "error",
+            text: "글 수정에 실패하였습니다.",
+          });
         }
       })
       .catch((err) => {

@@ -9,6 +9,8 @@ import moment from "moment";
 import { FillBtn } from "../../UI/Button";
 import { RootState } from "../../../reducer/store";
 import { PostInfo } from "../../../types/interfaces";
+import Swal from "sweetalert2";
+import Toast from "../../UI/Toast/Toast";
 
 const Detail: React.FC<PostInfo> = (props) => {
   const params = useParams();
@@ -16,22 +18,37 @@ const Detail: React.FC<PostInfo> = (props) => {
   const user = useSelector((state: RootState) => state.user);
 
   const DeleteHandler = () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      alert("확인");
-    }
-
-    const body = { postNum: params.postNum };
-    axios
-      .post("/api/post/delete", body)
-      .then((response) => {
-        if (response.data.success) {
-          alert("게시글이 삭제되었습니다.");
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        alert("게시글 삭제에 실패하였습니다.");
-      });
+    Swal.fire({
+      icon: "warning",
+      text: "정말로 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+      confirmButtonColor: "#50577a",
+      cancelButtonColor: "#BEBCBA",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const body = { postNum: params.postNum };
+        axios
+          .post("/api/post/delete", body)
+          .then((response) => {
+            if (response.data.success) {
+              Toast.fire({
+                icon: "success",
+                text: "게시글이 삭제되었습니다.",
+              }).then(() => {
+                navigate("/");
+              });
+            }
+          })
+          .catch((err) => {
+            Toast.fire({
+              icon: "error",
+              text: "게시글 삭제에 실패하였습니다.",
+            });
+          });
+      }
+    });
   };
 
   const setTime = (a: Date, b: Date) => {
