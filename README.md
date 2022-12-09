@@ -5,8 +5,9 @@
 
 
 📆 개발 기간: 2022.10.25 ~ 2022.11.03 약 1주 진행 (이후 틈틈이 리팩토링 진행-ing) <br/>
-👀 [Client] JavaScript → TypeScript로 마이그레이션 진행 <br/>
-👀 [Deploy] Heroku 유료 전환으로 인해 Heroku → fly.io로 배포 마이그레이션 진행
+
+☑️ [Client] JavaScript → TypeScript로 마이그레이션 진행 <br/>
+☑️ [Deploy] Heroku 유료 전환으로 인해 Heroku → fly.io로 배포 마이그레이션 진행
 
 <br/>
 
